@@ -7,7 +7,9 @@ sudo yum update -y
 sudo yum install -y docker
 sudo systemctl enable docker
 sudo systemctl start docker
-sudo usermod -aG docker ec2-user
+
+sudo usermod -aG docker $USER
+newgrp docker
 
 # Install kubectl
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
