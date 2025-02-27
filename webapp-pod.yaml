@@ -18,7 +18,7 @@ spec:
         - name: DBPORT
           value: "3306"
         - name: DATABASE
-          value: "employees_db"
+          value: "employees"
         - name: DBUSER
           value: "db_user"
         - name: DBPWD
