@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+  namespace: webapp
+  labels:
+    app: employees
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: employees
+  template:
+    metadata:
+      labels:
+        app: employees
+    spec:
+      imagePullSecrets:
+        - name: ecr-secret
+      containers:
+        - name: webapp
+          image: 788814499739.dkr.ecr.us-east-1.amazonaws.com/flask-mysql-ecr:app-latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DBHOST
+              value: "mysql-service.mysql.svc.cluster.local"
+            - name: DBPORT
+              value: "3306"
+            - name: DATABASE
+              value: "employees"
+            - name: DBUSER
+              value: "db_user"
+            - name: DBPWD
+              value: "db_password"
+
