@@ -1,7 +1,14 @@
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: webapp
+
+---
+apiVersion: v1
 kind: Pod
 metadata:
   name: webapp-pod
+  namespace: webapp
   labels:
     app: employees
 spec:
@@ -14,7 +21,7 @@ spec:
         - containerPort: 8080
       env:
         - name: DBHOST
-          value: "mysql-service"
+          value: "mysql-service.mysql.svc.cluster.local"
         - name: DBPORT
           value: "3306"
         - name: DATABASE
@@ -23,3 +30,4 @@ spec:
           value: "db_user"
         - name: DBPWD
           value: "db_password"
+
